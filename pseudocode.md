@@ -36,30 +36,6 @@ Look back at heros table to see how to get IDs to increment
 
 # Database schema
 ```
--3 tables are needed
-    -Menu_items
-    -Category
-    -Cuisine
-    (more can be added later on)
-
--Menu_items:
-    -ID
-    -name
-    -spice_level
-    -price
-    -description
-    -category_id
-    -cuisine_id
-
--Category:
-    -ID
-    -type
-
--Cuisine:
-    -ID
-    -type
-
--------------
 *From dbdiagram*
 
 Table Menu_items {
@@ -82,69 +58,9 @@ Table Category {
   type varchar
 }
 
--table bridges
-
 Ref: Menu_items.cuisine_id > Cuisine.id // many-to-one
 
 Ref: Menu_items.category_id > Category.id
-```
-
-# Class based structure
-```
-class GetMenuItem(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=4)
-    spicy_level = models.IntegerField()
-    category = models.ForeignKey()
-    cuisine = models.ForeignKey()
-
-    def __str__(self):
-        return self.text
-
-class GetCategory(models.Model):
-    type = models.CharField(max_length = 100)
-
-    def __str__(self):
-        return self.text
-
-class GetCuisine(models.Model):
-    type = models.CharField(max_length = 100)
-
-    def __str__(self):
-        return self.text
-```
-
-# Python functions
-```
-def all_menu_items()
-    menu_items = Menu_items.object.all()
-    for item in menu_items:
-        data.append({
-            "id": item.id,
-            "title": item.title,
-            "description": item.description,
-            "price": item.price,
-            "spice_level": item.spice_level,
-            "category": item.category_id,
-            "cuisine": item.cuisine_id,
-        })
-
-def categories()
-    category_type = Category.object.all()
-    for item in category_type:
-        data.append({
-            "id": item.id
-            "type": item.type
-        })
-
-def categories()
-    cuisine_type = Cuisine.object.all()
-    for item in cuisine_type:
-        data.append({
-            "id": item.id
-            "type": item.type
-        })
 ```
 
 # Endpoints:
